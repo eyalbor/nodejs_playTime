@@ -14,7 +14,7 @@ afterEach(async () => {
 })
 
 test('the header as the correct text', async () => {
-    const text = await page.$eval('a.brand-logo', el => el.innerHTML);
+    const text = await page.getContectsOf('a.brand-logo');
     expect(text).toEqual('Blogster');
 });
 
@@ -26,6 +26,9 @@ test('clicking login start oauth flow', async () =>{
 
 test('When signed in, shows logout button', async () => {
     //const id = '5fa988964cc8263510ec2cc4';
-    const text = await page.$eval('a[href="/auth/logout"]', el => el.innerHTML);
+
+    await page.login();
+
+    const text = await page.getContectsOf('a[href="/auth/logout"]');
     expect(text).toEqual('Logout');
 });
